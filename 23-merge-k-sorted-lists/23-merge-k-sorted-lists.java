@@ -14,30 +14,27 @@ class Solution {
         boolean found = true;
         ListNode head = new ListNode();
         ListNode res = head;
-        
-        while (found) {
-            found = false;
+
             for(int i=0; i<lists.length; i++) {
-                
               if (lists[i] != null) {
-                found = true;
                 heap.offer(lists[i]);
-                lists[i] = lists[i].next;
               }
-                
-          }
-            
-            if (found) {
-                res.next = heap.poll();
-               res = res.next;
             }
-        }
+                
+            while (heap.size() != 0) {
+              ListNode node = heap.poll();
+              res.next = node;
+              res = res.next;
+                
+              node = node.next;
+                
+                if (node != null) {
+                     heap.offer(node);
+                } 
+            }
         
-        while (heap.size() != 0) {
-            res.next = heap.poll();
-            res = res.next;
-        }
         res.next = null;
+                
         return head.next;
     }
 }
