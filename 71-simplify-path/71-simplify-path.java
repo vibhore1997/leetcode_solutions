@@ -19,11 +19,11 @@ class Solution {
         
         StringBuilder sb = new StringBuilder();
         
-        for (String s : stack) {
+        for (String s : stack) { // Magical traversal
             sb.append("/");
             sb.append(s);
         }
-        
+    
         if (sb.length() == 0) {
             sb.append("/");
         }
