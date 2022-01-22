@@ -6,12 +6,14 @@ class Solution {
         int i = 0;
         int j = 0;
         
-        while (j <= nums.length) {
-            if (j < k) {
-                while (!queue.isEmpty() && nums[j] > nums[queue.peekLast()]) {
+        while (j < nums.length) {
+            
+            while (!queue.isEmpty() && nums[j] > nums[queue.peekLast()]) {
                     queue.pollLast();
                 }
                 queue.offer(j);
+            
+            if (j - i + 1 < k) { // j - i + 1 is window size
                 j++;
             } else {
                 res[i] = nums[queue.peek()];
@@ -19,13 +21,6 @@ class Solution {
                 if (queue.peek() == i) {
                     queue.poll();
                 }
-                
-                if (j == nums.length) break;
-                
-                while (!queue.isEmpty() && nums[j] > nums[queue.peekLast()]) {
-                    queue.pollLast();
-                }
-                queue.offer(j);
                 
                 i++;
                 j++;
