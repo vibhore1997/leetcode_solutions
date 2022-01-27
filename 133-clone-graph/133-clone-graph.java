@@ -19,36 +19,25 @@ class Node {
 */
 
 class Solution {
+    Map<Node, Node> hmap = new HashMap<>();
     public Node cloneGraph(Node node) {
-        Map<Node, Node> hmap = new HashMap<>();
-        Queue<Node> queue = new LinkedList<>();
         
-        if (node == null) {
-            return null;
+       if (node == null) {
+           return null;
         }
         
-        queue.offer(node);
+        if (hmap.containsKey(node)) {
+            return hmap.get(node);
+        } 
         
-        while (queue.size() != 0) {
-            Node currNode = queue.poll();
-            
-            if (!hmap.containsKey(currNode)) {
-                Node newNode = new Node(currNode.val);
-                hmap.put(currNode, newNode);
-            }
-            
-            
-            for(Node eleNode : currNode.neighbors) {
-                if (hmap.containsKey(eleNode)) {
-                    hmap.get(currNode).neighbors.add(hmap.get(eleNode));
-                } else {
-                    Node newNode1 = new Node(eleNode.val);
-                    hmap.put(eleNode, newNode1);
-                    hmap.get(currNode).neighbors.add(newNode1);
-                    queue.offer(eleNode);
-                }
-            }
+        Node clone = new Node(node.val);
+        
+        hmap.put(node, clone);
+        
+        for(Node neighbor : node.neighbors) {
+            clone.neighbors.add(cloneGraph(neighbor));
         }
-        return hmap.get(node);
+        
+        return clone;
     }
 }
