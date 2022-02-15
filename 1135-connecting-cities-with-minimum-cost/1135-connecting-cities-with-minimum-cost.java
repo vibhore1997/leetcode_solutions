@@ -41,9 +41,9 @@ class Solution {
                 count++;
                 union(u,v,rank,parent);
             }
-            // if (count == n - 1) {
-            //     break;
-            // }
+            if (count == n - 1) {
+                break;
+            }
         }
         
         // for (int i=0; i<=n; i++) {
