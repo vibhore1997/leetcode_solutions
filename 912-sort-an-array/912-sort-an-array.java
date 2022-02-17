@@ -1,40 +1,44 @@
 class Solution {
     public int[] sortArray(int[] nums) {
-        mergesort(nums, 0, nums.length - 1);
+        // Quicksort
+        quicksort(nums, 0, nums.length - 1);
         return nums;
     }
     
-    private void mergesort(int nums[], int l, int h) {
+    private void quicksort(int[] nums, int l, int h) {
         if (l < h) {
-            int mid = (l+h)/2;
-            mergesort(nums, l, mid);
-            mergesort(nums, mid+1, h);
-            merge(nums, l, mid, h);
+            int pivot = partition(nums, l, h);
+            quicksort(nums, l, pivot - 1);
+            quicksort(nums, pivot + 1, h);
         }
     }
     
-    private void merge(int nums[], int l, int mid, int h) {
-        int[] b = new int[h-l+1];
+    private int partition(int[] nums, int l, int h) {
+        int pivotIndex = l;
+        int pivot = nums[pivotIndex];
         int i = l;
-        int j = mid + 1;
-        int k = 0;
+        int j = h;
         
-        while(i <= mid && j <= h) {
-            if (nums[i] < nums[j]) {
-                b[k++] = nums[i++];
-            } else {
-                b[k++] = nums[j++];
+        while (i < j) {
+            while(i < nums.length && nums[i] <= pivot) {
+                i++;
+            }
+            while(j >= 0 && nums[j] > pivot) {
+                j--;
+            }
+            if (i < j) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
             }
         }
+        // swap pivot with j
         
-        while(i <= mid) {
-            b[k++] = nums[i++];
-        }
-        while (j <= h) {
-            b[k++] = nums[j++];
-        }
+        int temp = nums[pivotIndex];
+        nums[pivotIndex] = nums[j];
+        nums[j] = temp;
         
-        for (int p = 0; p<k; p++)
-            nums[l++] = b[p];
+        return j;
+        
     }
 }
