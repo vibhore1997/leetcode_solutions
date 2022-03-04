@@ -1,5 +1,5 @@
 class Solution {
-    public int singleNonDuplicate(int[] nums) {
+    public int singleNonDuplicate(int[] nums) { // can also solve by even ka right wala should be same. not exactly approach 3.
         int l = 0;
         int h = nums.length - 1;
         if (nums.length == 1) {
