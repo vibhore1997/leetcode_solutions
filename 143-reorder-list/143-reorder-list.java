@@ -17,12 +17,13 @@ class Solution {
             return;
         }
         
-        while (fast.next != null && fast.next.next != null) {
+        while (fast.next != null && fast.next.next != null) { // can be changed to condition in solution,
+            // as I don't need where the last node is. I just need slow.
             slow = slow.next;
             fast = fast.next.next;
         }
         
-        if (fast.next == null) {
+        if (fast.next == null) { // unnecessary, if above changed
             
         }
         else if (fast.next.next == null) fast = fast.next;
