@@ -1,4 +1,10 @@
 class Twitter {
+    
+    // User to follows (hashmap<Integer, HashSet<Integer>>) 
+    // user to tweets (hashmap<Integer, List<Integer>>) tweet IDs
+    // tweet to time (hashmap<Integer, Integer>)
+    // Heap (Pair<time, tweetId>) --> Min heap on time, if size > 10, compare with peek and remove, if incoming time is greater.
+    
     Map<Integer, Integer> tmap;
     Map<Integer, Set<Integer>> fmap;
     List<Integer> posts;
