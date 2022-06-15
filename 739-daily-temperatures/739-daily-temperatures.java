@@ -1,16 +1,20 @@
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
-        int[] ans = new int[temperatures.length];
+        int n = temperatures.length;
+        int[] answer = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
         
-        Stack<Integer> stack = new Stack<>();
-        
-        for (int i = 0; i<ans.length; i++) {
-            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                int idx = stack.pop();
-                ans[idx] = i - idx;
+        for (int currDay = 0; currDay < n; currDay++) {
+            int currentTemp = temperatures[currDay];
+            // Pop until the current day's temperature is not
+            // warmer than the temperature at the top of the stack
+            while (!stack.isEmpty() && temperatures[stack.peek()] < currentTemp) {
+                int prevDay = stack.pop();
+                answer[prevDay] = currDay - prevDay;
             }
-            stack.push(i);
+            stack.push(currDay);
         }
-        return ans;
+        
+        return answer;
     }
 }
