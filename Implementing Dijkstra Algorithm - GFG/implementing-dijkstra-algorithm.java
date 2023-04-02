@@ -67,7 +67,7 @@ class Solution
         }
         dist[S] = 0;
         
-        PriorityQueue<Pair> queue = new PriorityQueue<>((a,b) -> a.distance - b.distance);
+        PriorityQueue<Pair> queue = new PriorityQueue<>();
         queue.offer(new Pair(0, S));
         
         while (queue.size() != 0) {
